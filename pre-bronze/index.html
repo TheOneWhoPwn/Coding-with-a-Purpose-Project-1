@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Bronze - A Guide for USACO</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+    <header>
+        <h1>A Guide for USACO</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/pre-bronze">Pre-Bronze</a>
+            <a href="/bronze">Bronze</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Pre-Bronze</h2>
+
+            <p>
+                Preperation for USACO
+            </p>
+        </section>
+        <section class="s1">
+            <p>
+                Welcome to A Guide for <a href="https://usaco.org">USACO</a>.
+            </p>
+            <p>
+                This guide covers topics from Bronze to Gold. In the Pre-Bronze section, we will briefly talk about the basics of programming knowledge. Even though we will assume that you already have some coding backgrounds and are familiar with basic syntax, we will go over them in case you don't know them.
+            </p>
+            <p>
+                Additionally, all the content will be covered in C++, since this is the most efficient and recommended language for competitive programming. It is recommended to switch to C++ even if you have years of background in Python or Java.
+            </p>
+            <p>
+                After we cover the basics of programming, we will talk about problem-solving mindset and provide some very siple problems for you get a sense of the format of the contest and how we will explain each concept and problem.
+            </p>
+            <p>
+                Now, let's get started.
+            </p>
+            <h3 style="font-size: 32px">Basics of Programming</h3>
+            <h3>Input and Output</h3>
+            <p>
+                Input and Output is literally the first step in programming. Let's look at how it is done in C++.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+        
+int main() {
+    int n, m;
+    cin >> n >> m;
+    cout &lt;&lt; n+m;
+}</code></pre>
+            <p>
+                Let's explain line by line. The first line is a header to automatically include every standard C++ library at once. It is specific to GNU GCC compiler, so make sure to download it.
+            </p>
+            <p>
+                The second line does a clean up for your code. So you will actually type less.
+            </p>
+            <p>
+                Then you declare <code>n</code> and <code>m</code> with <code>int n, m;</code>, and use <code>cin >> n >> m;</code> to intake it. Then use <code>cout &lt;&lt; n+m;</code> to output the sum. And that's it.
+            </p>
+            <h3>Loops and If Statements</h3>
+            <p>
+                We will assume you know what for and while loops are. We will only look at the syntax here.
+            </p>
+            <pre><code class="language-cpp">for (int i = 0; i&lt;n; i++) {
+    
+}
+</code></pre>
+            <p>
+                This is a for loop in C++. In this case it iterates from 0 to n-1.
+            </p>
+            <pre><code class="language-cpp">while (statement) {
+    
+}
+</code></pre>
+            <p>
+                This is a while loop in C++. As long as <code>statement</code> is true, the loop continues.
+            </p>
+            <pre><code class="language-cpp">if (statement1) {
+    return 1;
+} else if (statment2) {
+    return 2;
+} else {
+    return 3;
+}
+</code></pre>
+            <p>
+                This is a series of if statements. If statement1 is true, 1 is returned. If if statement 1 is false and statement2 is true; 2 is returned. If none of them is true, 3 is returned.
+            </p>
+            <h3>Data Strucutre</h3>
+            <p>
+                For Bronze, you will most likely only need to know how to use a vector in C++. For now, you can look at it as a list. We will look at other data structures later on and talk about the difference.
+            </p>
+            <pre><code class="language-cpp">vector&lt;int&gt; v1;
+vector&lt;int&gt; v2 = {10, 20, 30};
+vector&lt;int&gt; v3(5, 100);
+</code></pre>
+            <p>
+                These are three ways to initiate a vector. The first one is just an empty vector. The second one is initiated with some specific values. The third one is initiated with 5 100s in the vector.
+            </p>
+            <pre><code class="language-cpp">v1.push_back(1);</code></pre>
+            <p>
+                Simply append a value to the end of a vector.
+            </p>
+            <pre><code class="language-cpp">v1[index]</code></pre>
+            <p>
+                Simply access the value at the index in a vector.
+            </p>
+            <h3 style="font-size: 32px">Example Problem</h3>
+            <p>
+                Having seen the basics, let's do an example problem. Link: <a href="https://cses.fi/problemset/task/1083/" target="_blank" rel="noopener noreferrer">Missing Number</a>
+            </p>
+            <p>
+                With everything we had covered so far, it is enough to solve this problem. Try to solve it on your own before scrolling furthur to see the solution.
+            </p>
+            <h3>Solution</h3>
+            <p>
+                Finished? or just completely stuck? Anyways, let's see how to solve the problem. 
+            </p>
+            <p>
+                Initially, we observed that we are given a number and a list of numbers. And our goal is to find that missing number.
+            </p>
+            <p>
+                So we can put all the list of numbers into a vector, and then individually check if that number actually exists.
+            </p>
+            <p>
+                Sure that works, BUT, remember there is a time limit in competitive programming. If our code ran for too long, we will get TLE(Time Limit Exceeded).
+            </p>
+            <p>
+                With this solution, we need to iterate through the vector for every number. This is a O(N^2) solution. Since n can be as big as 200000 in this case, we will need to use around 4 * 10 ^ 10 steps. As a rule of thumb, any steps greater than 10^8 will get TLE.
+            </p>
+            <p>
+                But we can get a little clever here. We can use a boolean vector to keep track of every number we have seen. Here is what I came up with.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+ 
+int main() {
+	int N;
+	cin &gt;&gt; N;
+	vector&lt;bool&gt; data(N, true);
+    for (int i = 0; i &lt; N; i++) {
+        int temp;
+		cin &gt;&gt; temp;
+		data[temp - 1] = false;
+    }
+ 
+	for (int i = 0; i &lt; N; i++) {
+		if (data[i]) {
+			cout &lt;&lt; i + 1 &lt;&lt; endl;
+			break;
+		}
+    }
+}
+</code></pre>
+            <p>
+                This is a O(N) solution, which is much better. Here is a visualization of this code.
+            </p>
+        </section>
+        <section class="visual_sec">
+            <div class="visual_window">
+                <div class="visual_sub_window" id="vis_display">
+
+                </div>
+                <div class="visual_io_window">
+                    <h2>INPUT</h2>
+                    <div>
+                        <label for="userInput1">N</label>
+                        <input type="text" id="userInput1" placeholder="5">
+                    </div>
+                    <div>
+                        <label for="userInput2">LIST</label>
+                        <input type="text" id="userInput2" placeholder="2 3 1 5">
+                    </div>
+                    <div>
+                        <br>
+                        <button id="runBtn">Run</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="s1">
+            <h3>Conclusion</h3>
+            <p>
+                You have finished the Pre-Bronze section. We have gone through the basics of C++ and USACO. Now, you should be ready to take on the Bronze section, where we will talk about some algorithms and some more useful data structures.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>A Guide for USACO</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script>
+        const run_button = document.getElementById('runBtn');
+        const vis_display = document.getElementById('vis_display');
+
+        function updateVisualization(numbers, N) {
+            if (!vis_display) return;
+            vis_display.innerHTML = "";
+
+            const container = document.createElement("div");
+            container.className = "number_container";
+
+            for (let i = 1; i <= N; i++) {
+                const box = document.createElement("div");
+                box.className = "number_box";
+                box.id = `vis-number-${i}`;
+                box.innerText = i;
+                container.appendChild(box);
+            }
+            vis_display.appendChild(container);
+
+            const status = document.createElement("div");
+            status.className = "vis_status";
+            status.id = "vis_status";
+            status.innerText = "Starting...";
+            vis_display.appendChild(status);
+
+            animateAlgorithm(numbers, N);
+        }
+
+        function animateAlgorithm(numbers, N) {
+            const status = document.getElementById("vis_status");
+            const foundNumbers = new Set();
+
+            numbers.forEach(num => {
+                if (num >= 1 && num <= N) {
+                    foundNumbers.add(num);
+                }
+            });
+
+            let index = 0;
+            function showNextNumber() {
+                if (index >= numbers.length) {
+                    checkForMissing();
+                    return;
+                }
+
+                const num = numbers[index];
+
+                if (num >= 1 && num <= N) {
+                    const box = document.getElementById(`vis-number-${num}`);
+                    if (box) {
+                        box.classList.add("checking");
+                        setTimeout(() => {
+                            box.classList.remove("checking");
+                            box.classList.add("found");
+                            status.innerText = `${num} was marked.`;
+                            index++;
+
+                            setTimeout(showNextNumber, 500);
+                        }, 700);
+                        return;
+                    }
+                }
+                index++;
+                showNextNumber();
+            }
+
+            function checkForMissing() {
+                status.innerText = "All input numbers have been processed.";
+                setTimeout(() => {
+                    let i = 1;
+                    function findNext() {
+                        if (i > N) {
+                            status.innerText = "No missing number found.";
+                            return;
+                        }
+                        const box = document.getElementById(`vis-number-${i}`);
+
+                        if (!box.classList.contains("found")) {
+                            box.classList.add("checking");
+                            status.innerText = `Checking position ${i}...`;
+                            setTimeout(() => {
+                                box.classList.remove("checking");
+                                box.classList.add("missing");
+                                status.innerText = `Missing number: ${i}`;
+                            }, 700);
+                            return;
+                        } else {
+                            box.classList.add("checking");
+                            status.innerText = `Checking position ${i}...`;
+                            setTimeout(() => {
+                                box.classList.remove("checking");
+                                box.classList.add("found");
+                            }, 700);
+                        }
+                        i++;
+                        setTimeout(findNext, 300);
+                    }
+                    findNext();
+                }, 700);
+            }
+            showNextNumber();
+        }
+
+        function processData(event) {
+            if (event) event.preventDefault();
+            
+            const n = document.getElementById('userInput1');
+            const list = document.getElementById('userInput2').value;
+            const N = parseInt(n.value.trim(), 10);
+            const stringArray = list.split(" ");
+            
+            if (isNaN(N) || N <= 0) {
+                setOutput("Please enter a valid positive integer for N", "red");
+                return;
+            }
+
+            const numbers = stringArray.map(Number);
+            const data = new Array(N).fill(true);
+
+            updateVisualization(numbers, N);
+        }
+
+        if (run_button) {
+            run_button.addEventListener('click', processData);
+        }
+    </script>
+</body>
+
+</html>

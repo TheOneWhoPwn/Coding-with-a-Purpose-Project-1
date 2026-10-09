@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronze - A Guide for USACO</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>A Guide for USACO</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/pre-bronze">Pre-Bronze</a>
+            <a href="/bronze">Bronze</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Complete Search</h2>
+        </section>
+        <section class="s1">
+            <p>
+                Sometimes you are asked to search for a solution. For Bronze, a complete search, meaning you iterate through every possibility, is often enough.
+            </p>
+            <p>
+                This is also known as brute force. Fortunately, this is ok for Bronze.
+            </p>
+            <p>
+                We won't include any visualizations in this unit due to the intuitive nature of these problems.
+            </p>
+            <h3 style="font-size: 32px">USACO Problem</h3>
+            <p>
+                As a reminder, brute force is enough.
+            </p>
+            <p>
+                Link: <a href="https://usaco.org/index.php?page=viewproblem2&cpid=615" target="_blank" rel="noopener noreferrer">Milk Pails</a>
+            </p>
+            <h3>Solution</h3>
+            <p>
+                Just iterate through all possible values of using X and Y. We will iterate through 1000 * 1000 = 10^6 times, which is enough.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    freopen("pails.in", "r", stdin);
+	freopen("pails.out", "w", stdout);
+
+    int x, y, m;
+    cin &gt;&gt; x &gt;&gt; y &gt;&gt; m;
+
+    int ans = 0;
+    for (int xPour = 0; xPour * x &lt;= m; xPour++) {
+        for (int yPour = 0; xPour * x + yPour * y &lt;= m; yPour++) {
+            int current = xPour * x + yPour * y;
+            if (current &gt; ans) {
+                ans = current;
+            }
+        }
+    }
+
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}
+
+</code></pre>
+        <button id="nextButton">Next</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>A Guide for USACO</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script>
+        const button = document.getElementById("nextButton");
+
+        button.addEventListener("click", function () {
+            window.location.href = '/bronze/sets.html';
+        });
+    </script>
+
+</body>
+
+</html>

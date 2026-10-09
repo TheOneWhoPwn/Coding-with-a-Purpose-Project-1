@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronze - A Guide for USACO</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>A Guide for USACO</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/pre-bronze">Pre-Bronze</a>
+            <a href="/bronze">Bronze</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Simulation</h2>
+        </section>
+        <section class="s1">
+            <p>
+                Simulation problems are arguably the easiest problem types you will encounter in Bronze.
+            </p>
+            <p>
+                All you really need to do is to understand the problem and just code it up.
+            </p>
+            <p>
+                We won't include any visualizations in this unit due to the intuitive nature of these problems.
+            </p>
+            <h3 style="font-size: 32px">Example Problem</h3>
+            <p>
+                Let's look at a sample problem. Link: <a href="https://cses.fi/problemset/task/1068" target="_blank" rel="noopener noreferrer">Weird Algorithm</a>
+            </p>
+            <h3>Solution</h3>
+            <p>
+                Pretty easy, isn't it. You just need to follow the instruction and just code the solution. And you will naturally pass with full credit.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+ 
+int main() {
+	long long x;
+	cin &gt;&gt; x;
+    while(x!=1){
+		cout &lt;&lt; x &lt;&lt; " ";
+		if(x%2==0)x/=2;
+		else x=3*x+1;
+	}
+	cout &lt;&lt; x &lt;&lt; endl;
+}
+</code></pre>
+        <p>
+            <h3 style="font-size: 32px">USACO Problem</h3>
+            <p>
+                However, sometimes, something can happen in these problems.
+            </p>
+            <p>
+                To see what we mean by that, we will look at a real USACO problem.
+            </p>
+            <p>
+                Link: <a href="https://usaco.org/index.php?page=viewproblem2&cpid=1372" target="_blank" rel="noopener noreferrer">Cannonball</a>
+            </p>
+            <h3>Solution</h3>
+            <p>
+                Hmm. You might got TLE on some test cases. Let's look at why.
+            </p>
+            <p>
+                Sometimes, you might want to consider the possibility of infinite loops in simulation problems. Here, there is such possibility.
+            </p>
+            <p>
+                We sure can check for these infinite loops, but it is much easier to set a certain amount of iterations as a cap to hard stop the infinite loop.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+ 
+int main() {
+	int n, x;
+	cin &gt;&gt; n &gt;&gt; x;
+	vector&lt;pair&lt;int, int&gt;&gt; pad(n + 1);
+	vector&lt;bool&gt; vis(n + 1);
+	for (int i = 1; i &lt;= n; ++i)
+		cin &gt;&gt; pad[i].first &gt;&gt; pad[i].second;
+	int dir = 1, power = 1, ans = 0;
+	for (int reps = 0; reps &lt; 5000000 && 1 &lt;= x && x &lt;= n; ++reps) {
+		if (pad[x].first == 1 && power &gt;= pad[x].second && !vis[x]) {
+			vis[x] = true;
+			++ans;
+		}
+		if (pad[x].first == 0) {
+			dir *= -1;
+			power += pad[x].second;
+		}
+		x += dir * power;
+	}
+	cout &lt;&lt; ans &lt;&lt; endl;
+}
+</code></pre>
+        <button id="nextButton">Next</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>A Guide for USACO</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script>
+        const button = document.getElementById("nextButton");
+
+        button.addEventListener("click", function () {
+            window.location.href = '/bronze/complete-search.html';
+        });
+    </script>
+
+</body>
+
+</html>

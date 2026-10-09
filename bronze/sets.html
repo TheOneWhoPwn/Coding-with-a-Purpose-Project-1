@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronze - A Guide for USACO</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>A Guide for USACO</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/pre-bronze">Pre-Bronze</a>
+            <a href="/bronze">Bronze</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Sets</h2>
+        </section>
+        <section class="s1">
+            <p>
+                Sets is a type of data structure where it can only store 1 unique item. 
+            </p>
+            <p>
+                Vector can store multiple items of the same value. In a set, every item must be unique.
+            </p>
+            <pre><code class="language-cpp">set&lt;int&gt; s;</code></pre>
+            <p>
+                This line decalres a set for integers.
+            </p>
+            <pre><code class="language-cpp">s.insert(num);</code></pre>
+            <p>
+                This line inserts a number into s. If the number already exists, nothing will be added. If not, the number is added.
+            </p>
+            <pre><code class="language-cpp">s.insert(1);
+s.insert(2);
+s.insert(2);</code></pre>
+            <p>
+                In the end, only 1 and 2 will be in the set. The third line did nothing, since 2 is already in the set.
+            </p>
+            <h3 style="font-size: 32px">Example Problem</h3>
+            <p>
+                Let's go use sets in an example problem.
+            </p>
+            <p>
+                Link: <a href="https://cses.fi/problemset/task/1621/" target="_blank" rel="noopener noreferrer">Distinct Numbers</a>
+            </p>
+            <h3>Solution</h3>
+            <p>
+                First, if we don't use sets, we can slightly tweak the solution we used in the pre-bronze section problem.
+            </p>
+            <p>
+                But now that we know sets, we can just append everything we received into the set and let the data structure does it job.
+            </p>
+            <p>
+                Pretty lazy, but it works.
+            </p>
+            <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    set&lt;int&gt; s;
+    for (int i = 0; i&lt;n; i++){
+        int temp;
+        cin &gt;&gt; temp;
+        s.insert(temp);
+    }
+    cout &lt;&lt; s.size() &lt;&lt; endl;
+}</code></pre>
+        </section>
+        <section class="visual_sec">
+            <div class="visual_window">
+                <div class="visual_sub_window" id="vis_display">
+
+                </div>
+                <div class="visual_io_window">
+                    <h2>INPUT</h2>
+                    <div>
+                        <label for="userInput1">N</label>
+                        <input type="text" id="userInput1" placeholder="5">
+                    </div>
+                    <div>
+                        <label for="userInput2">LIST</label>
+                        <input type="text" id="userInput2" placeholder="2 3 1 5">
+                    </div>
+                    <div>
+                        <br>
+                        <button id="runBtn">Run</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="s1"></section>
+    </main>
+
+    <footer>
+        <p>A Guide for USACO</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script>
+        const button = document.getElementById("nextButton");
+
+        button.addEventListener("click", function () {
+            window.location.href = '/bronze/sets.html';
+        });
+    </script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronze - A Guide for USACO</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>A Guide for USACO</h1>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/pre-bronze">Pre-Bronze</a>
+            <a href="/bronze">Bronze</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Bronze</h2>
+            <button id="intro">Intro</button>
+            <button id="sim">Simulation</button>
+            <button id="cs">Complete Search</button>
+            <button id="set">Sets</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>A Guide for USACO</p>
+    </footer>
+
+    <script>
+        const intro = document.getElementById("intro");
+        const sim = document.getElementById("sim");
+        const cs = document.getElementById("cs");
+        const set = document.getElementById("set");
+
+        intro.addEventListener("click", function () {
+            window.location.href = '/bronze/intro.html';
+        });
+        sim.addEventListener("click", function () {
+            window.location.href = '/bronze/simulation.html';
+        });
+        cs.addEventListener("click", function () {
+            window.location.href = '/bronze/complete-search.html';
+        });
+        set.addEventListener("click", function () {
+            window.location.href = '/bronze/sets.html';
+        });
+    </script>
+
+</body>
+
+</html>
