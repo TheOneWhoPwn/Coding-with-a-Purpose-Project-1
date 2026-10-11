@@ -90,7 +90,7 @@ int main() {
                     </div>
                     <div>
                         <label for="userInput2">LIST</label>
-                        <input type="text" id="userInput2" placeholder="2 3 1 5">
+                        <input type="text" id="userInput2" placeholder="2 3 2 2 3">
                     </div>
                     <div>
                         <br>
@@ -114,6 +114,93 @@ int main() {
 
         button.addEventListener("click", function () {
             window.location.href = '/bronze/sets.html';
+        });
+    </script>
+    <script>
+        const display = document.getElementById("vis_display");
+        const runBtn = document.getElementById("runBtn");
+
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+        runBtn.addEventListener("click", async () => {
+            const n = Number(document.getElementById("userInput1").value);
+            const raw = document.getElementById("userInput2").value.trim();
+            const tokens = raw ? raw.split(/\s+/) : [];
+
+            if (!Number.isInteger(n) || n < 0 ||
+                tokens.length !== n ||
+                tokens.some(x => !/^[+-]?\d+$/.test(x) ||
+                    !Number.isSafeInteger(Number(x)))) {
+                alert("Please enter N and exactly N valid integers.");
+                return;
+            }
+
+            const numbers = tokens.map(Number);
+            const unique = new Set();
+
+            runBtn.disabled = true;
+            display.innerHTML = "";
+
+            const title = document.createElement("h3");
+            title.textContent = "Input Array";
+            display.appendChild(title);
+
+            const inputRow = document.createElement("div");
+            inputRow.className = "number_container";
+            display.appendChild(inputRow);
+
+            const boxes = numbers.map(num => {
+                const box = document.createElement("div");
+                box.className = "number_box";
+                box.textContent = num;
+                inputRow.appendChild(box);
+                return box;
+            });
+
+            const setTitle = document.createElement("h3");
+            setTitle.textContent = "Current Set";
+            display.appendChild(setTitle);
+
+            const setRow = document.createElement("div");
+            setRow.className = "number_container";
+            display.appendChild(setRow);
+
+            const status = document.createElement("div");
+            status.className = "vis_status";
+            display.appendChild(status);
+
+            for (let i = 0; i < numbers.length; i++) {
+                const num = numbers[i];
+                const box = boxes[i];
+
+                box.classList.add("checking");
+                status.textContent = `Checking ${num}...`;
+                await sleep(650);
+
+                if (unique.has(num)) {
+                    box.classList.remove("checking");
+                    box.classList.add("missing");
+                    status.textContent = `${num} is a duplicate. Skipped!`;
+                } else {
+                    unique.add(num);
+                    box.classList.remove("checking");
+                    box.classList.add("found");
+                    status.textContent = `${num} inserted successfully!`;
+
+                    setRow.innerHTML = "";
+                    [...unique].sort((a, b) => a - b).forEach(value => {
+                        const item = document.createElement("div");
+                        item.className = "number_box found";
+                        item.textContent = value;
+                        setRow.appendChild(item);
+                    });
+                }
+
+                await sleep(700);
+            }
+
+            status.textContent = `Output: ${unique.size}`;
+            runBtn.disabled = false;
         });
     </script>
     
